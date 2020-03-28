@@ -14,24 +14,30 @@ class entropy:
         entropia = sum(self.entropy_list)
 
         j = 0 
-        k = 3
+        k = 1
         l = 0
         m = 1
+        p = 2
 
         while ent/entropia > 1.03 or ent/entropia < 0.97:
             if entropia > ent:
-                for i in range(j,k):
+                if j > len(self.randvalues) or k > (len(self.randvalues)-1):
+                    break
+                for i in range(j,k+1):
                     self.values[i] = 1
                 self.randvalues = np.array(self.values)
                 self.entropy_list = []
                 for i in np.unique(self.randvalues):
                     self.entropy_list.append(-(np.count_nonzero(self.randvalues == i)/self.randvalues.size)*np.log2(np.count_nonzero(self.randvalues == i)/self.randvalues.size))
                 entropia = sum(self.entropy_list)
+                div = int(round((entropia-ent)/p*len(self.values)))
+                print(div)
+                if div == 0:
+                    div = 1
                 self.entropy_list = []
-                j += 3
-                k += 3
-                if j > len(self.randvalues) or k > len(self.randvalues):
-                    break
+                j = k+1
+                k = j+div
+                p += 1
             elif entropia < ent:
                 for i in range(l,m):
                     self.values[i] = 2
