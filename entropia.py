@@ -19,10 +19,8 @@ class entropy:
         m = 1
         p = 2
 
-        while ent/entropia > 1.03 or ent/entropia < 0.97:
+        while j < len(self.randvalues) or k < (len(self.randvalues)-1):
             if entropia > ent:
-                if j > len(self.randvalues) or k > (len(self.randvalues)-1):
-                    break
                 for i in range(j,k+1):
                     self.values[i] = 1
                 self.randvalues = np.array(self.values)
@@ -31,14 +29,16 @@ class entropy:
                     self.entropy_list.append(-(np.count_nonzero(self.randvalues == i)/self.randvalues.size)*np.log2(np.count_nonzero(self.randvalues == i)/self.randvalues.size))
                 entropia = sum(self.entropy_list)
                 div = int(round((entropia-ent)/p*len(self.values)))
-                print(div)
                 if div == 0:
                     div = 1
                 self.entropy_list = []
                 j = k+1
                 k = j+div
                 p += 1
-            elif entropia < ent:
+                if entropia < ent:
+                    break 
+            elif entropia <= ent:
+                """
                 for i in range(l,m):
                     self.values[i] = 2
                 self.randvalues = np.array(self.values)
@@ -49,8 +49,8 @@ class entropy:
                 self.entropy_list = []
                 l += 1
                 m += 1
-                if entropia > ent:
-                    break
+                """
+                break
             
 
         self.array = random.shuffle(self.randvalues)
@@ -59,4 +59,3 @@ class entropy:
         plt.imshow(self.array)
         plt.title("Entropia: {}".format(round(entropia,3)))
         plt.show()
-        return self.array
