@@ -28,7 +28,7 @@ potem następuje wyliczenie entropii.
 Liczba elementów która ma być wymieniona jest obliczana na podstawie wzoru:
 (różnica pomiędzy entropią pierwotną i zadaną) * liczba elementów w liście / wartość p
 
-wartość p początkowo wynosi 2, ale jest zwiększana przy każdej iteracji. Ma to ograniczyć zachłanność
+wartość p początkowo jest równa liczbie klas (w celu dopasowania dokładności), ale jest zwiększana przy każdej iteracji. Ma to ograniczyć zachłanność
 algorytmu.
 
 Dzięki temu algorytm przy pierwszej iteracji jest w stanie wymienić dużą część listy, ale przy kolejnych 
@@ -42,8 +42,7 @@ Problem ten został naprawiony w następujący sposób:
 -stworzona została lista zapisująca po kolei wszystkie przybliżone wartości entropii wyznaczone przez
 użytkownika
 -stworzona zostałą druga pętla wykonująca operację odwrotną niż pierwsza.
-Przykładowo jeżeli zostanie osiągnięta wartość 0.12 to druga pętla zwiększy wartość entropii do poprzedniej
-(0.26) i porówna która wartość jest bliższa zadanej entropii:
+Przykładowo jeżeli zostanie osiągnięta wartość 0.12 to druga pętla zwiększy wartość entropii  i porówna która wartość jest bliższa zadanej entropii:
 -ostatnia wartość z listy entropii wyznaczonej przez pierwszą pętlę (0.12) czy wartość "testowa" entropii
 wyznaczona przez drugą pętlę (0.26). W tym przypadku wartość entropii zostanie nadpisana przez wartość
 "testową" i wtedy algorytm się zakończy.
