@@ -17,7 +17,7 @@ class entropy:
 
         j = 0 
         k = 1
-        p = 2
+        p = self.class_num #parametr p czyli liczba klas
         entropies = []
 
         while True:
