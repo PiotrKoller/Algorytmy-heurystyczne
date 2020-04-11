@@ -14,6 +14,8 @@ class MyForm(QMainWindow):
         self.entropy_line_2 = self.ui.entropy_line_2
         self.entropy_line_3 = self.ui.entropy_line_3
         self.class_spinbox = self.ui.class_spinbox
+        self.entropy_line_2.setText("8")
+        self.entropy_line_3.setText("8")
         self.entropia = entropy
         self.max_entropy_value()
         self.class_spinbox.valueChanged.connect(self.max_entropy_changed)
@@ -31,8 +33,11 @@ class MyForm(QMainWindow):
             self.error_dialog.showMessage("Zbyt duża wartość.")
 
     def max_entropy_value(self):
-        self.max = self.entropia.max_entropy(self,2,10,10)
-        text = "Maksymalna entropia: " + str(round(self.max,2))
+        self.x = self.entropy_line_2.text()
+        self.y = self.entropy_line_3.text()
+        self.class_num = self.class_spinbox.value()
+        self.max = self.entropia.max_entropy(self,self.class_num,self.x,self.y)
+        text = "Maksymalna entropia: " + str(self.max)
         self.entropy_line.setPlaceholderText(text)
 
     def max_entropy_changed(self):
@@ -43,7 +48,7 @@ class MyForm(QMainWindow):
             self.max = self.entropia.max_entropy(self,self.class_num,self.x,self.y)
         except:
             self.error_dialog.showMessage("Ustaw rozmiar obrazu.")
-        text = "Maksymalna entropia: " + str(round(self.max,2))
+        text = "Maksymalna entropia: " + str(self.max)
         self.entropy_line.setPlaceholderText(text)
 
 if __name__ == "__main__":
